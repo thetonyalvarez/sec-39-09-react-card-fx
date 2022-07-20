@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import logo from './assets/blackjack.png'
+import React, { useState, useEffect } from 'react'
 import Button from '@mui/material/Button';
+import logo from './assets/blackjack.png'
 import PlayingCard from './PlayingCard'
 import './App.css'
 
