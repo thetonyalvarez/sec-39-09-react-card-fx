@@ -1,12 +1,14 @@
 import React from 'react';
-import axios from 'axios';
-import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
+import './PlayingCard.css';
 
-const PlayingCard = (props) => {
+const PlayingCard = ({ card }) => {
+
   return (
-    <img className="PlayingCard-image" src={props.image}/>
+    <Box data-testid="PlayingCard" sx={{ display: 'inline-block', width: 200 }}>
+      <img className="PlayingCard-image" src={card} />
+    </Box>
   )
 }
 
-export default PlayingCard
+export default PlayingCard 

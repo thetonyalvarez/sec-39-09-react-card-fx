@@ -1,0 +1,52 @@
+// Vitest Snapshot v1
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+  >
+    <header
+      class="App-header"
+    >
+      <img
+        alt="Blackjack!"
+        class="App-logo"
+        src="/src/assets/bicycle-logo.png"
+      />
+    </header>
+    <main
+      class="App-main"
+    >
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+      >
+        <div
+          class="MuiBox-root css-zitybv"
+        >
+          <button
+            class="MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-zcbmsk-MuiButtonBase-root-MuiButton-root"
+            data-testid="deal-btn"
+            tabindex="0"
+            type="button"
+          >
+            Deal New Card
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="MuiBox-root css-zitybv"
+          data-testid="isRemaining"
+        >
+          Cards left in deck: 52
+        </div>
+        <div
+          class="MuiBox-root css-6n7j50"
+          data-testid="cards"
+        />
+      </div>
+    </main>
+  </div>
+</DocumentFragment>
+`;
