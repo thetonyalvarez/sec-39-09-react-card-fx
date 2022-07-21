@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
@@ -21,30 +21,47 @@ let deck_id = await getNewDeck()
 
 function App() {
 
-  const [count, setCount] = useState(52)
-  const [cards, setCards] = useState([])
-  const [isRemaining, setIsRemaining] = useState(`Cards left in deck: ${count}`)
-  const [disable, setDisable] = useState(false);
+  const timerID = useRef();
 
-  async function fetchCard() {
-    const response = await axios.get(BASE_API + `${deck_id}/draw/?count=1`)
-    let { error, cards, remaining } = response.data
-
-    if (error) {
-      setIsRemaining(error)
-      setDisable(true)
-    } else {
-      setCards(prevCards => [...prevCards, <PlayingCard key={cards[0].code} card={cards[0].image}/>])
-      setCount(remaining)
-      setIsRemaining(`Cards left in deck: ${count}`)
-    }
-  }
+  let [count, setCount] = useState(null)
+  let [playingCards, setPlayingCards] = useState([])
+  let [disable, setDisable] = useState(false);
+  let [timer, setTimer] = useState(false);
+  let [btnText, setBtnText] = useState(`Start Drawing Cards`);
 
   useEffect(function fetchCardWhenMounted() {
-    console.log('i fire once');
 
-    fetchCard();
-  }, [])
+    if (timer) {
+
+      timerID.current = setInterval(() => {
+        console.log("EFFECT RAN!")
+  
+        async function fetchCard() {
+          const response = await axios.get(BASE_API + `${deck_id}/draw/?count=1`)
+          let { error, cards, remaining } = response.data
+      
+          if (error) {
+            setDisable(true)
+          } else {
+            setCount(remaining)
+            setBtnText(`STOP`)
+            setPlayingCards(prevCards => [...prevCards, <PlayingCard key={cards[0].code} card={cards[0].image}/>])
+          }
+        }
+  
+        fetchCard();
+      }, 1000)
+  
+      return function cleanUpClearTimer() {
+        console.log("Unmount ID", timerID.current);
+        setBtnText(`Start Drawing Cards`);
+        clearInterval(timerID.current);
+      }
+
+    }
+    
+  
+  }, [timer])
 
   return (
     <div className="App">
@@ -56,21 +73,21 @@ function App() {
           <Box
             sx={{ my: 4 }}
           >
-            <Button data-testid="deal-btn" color="secondary" variant="contained" onClick={fetchCard} disabled={disable}>
-              Deal New Card
+            <Button
+              data-testid="deal-btn"
+              color="secondary"
+              variant="contained"
+              onClick={() => setTimer(prevBool => !prevBool)}
+              disabled={disable}
+            >
+              {btnText}
             </Button>
-          </Box>
-          <Box
-            data-testid="isRemaining" 
-            sx={{ my: 4 }}
-          >
-            {isRemaining}
           </Box>
           <Box
             data-testid="cards" 
             sx={{ display: 'inline' }}
           >
-            {cards}
+            {playingCards}
           </Box>
         </Container>
       </main>

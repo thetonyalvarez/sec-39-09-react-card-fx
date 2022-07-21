@@ -19,14 +19,7 @@ it("should render Deal New Card button", function() {
   const { getByTestId } = render(<App />)
   
   const dealBtn = getByTestId('deal-btn')
-  const text = within(dealBtn).getByText('Deal New Card')
+  const text = within(dealBtn).getByText('Start Drawing Cards')
 
   expect(text).toBeVisible()
-});
-
-it("should render text declaring how many cards are left", function() {
-  const { getByTestId } = render(<App />)
-  
-  const isRemaining = getByTestId('isRemaining')
-  expect(isRemaining).toContainHTML('Cards left in deck')
 });
