@@ -29,17 +29,11 @@ exports[`matches snapshot 1`] = `
             tabindex="0"
             type="button"
           >
-            Deal New Card
+            Start Drawing Cards
             <span
               class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
-        </div>
-        <div
-          class="MuiBox-root css-zitybv"
-          data-testid="isRemaining"
-        >
-          Cards left in deck: 52
         </div>
         <div
           class="MuiBox-root css-6n7j50"
